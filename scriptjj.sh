@@ -23,3 +23,4 @@ for user in $users_inactifs; do
     echo "le compte n'a pas été supprimé"
     fi;
 done;
+

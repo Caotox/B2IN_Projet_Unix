@@ -18,9 +18,8 @@ for user in $users_inactifs; do
     echo "souhaitez vous verrouillez ou supprimer ce compte ?"
     read reponse_inactivite
     if [$reponse_inactivite="supprimer"]; then
-    userdel $users_inactifs
+    sauvegarder $users_inactifs && userdel $users_inactifs
     else
     echo "le compte n'a pas été supprimé"
     fi;
 done;
-

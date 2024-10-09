@@ -21,7 +21,7 @@ for user in $users_inactifs; do
     read -p "Choisissez une option (1, 2) : " reponse_inactivite
 case $reponse_inactivite in
         1)
-            sudo chage -E 0 $user
+            sudo chage -E 0 $user #verrouille le compte du user au bout de 0 jour (donc instantanément)
             echo "Le compte de $user a été verrouillé."
             ;;
         2)
@@ -29,12 +29,11 @@ case $reponse_inactivite in
             
             if [[ -d "$user_home_dir" ]]; then
                 echo "Sauvegarde du répertoire personnel de $user..."
-                tar -czf /backup/${user}_home_backup_$(date +%Y%m%d).tar.gz "$user_home_dir"
-                echo "Sauvegarde terminée : /backup/${user}_home_backup_$(date +%Y%m%d).tar.gz"
+                tar -czf /backup/${user}_home_backup_$(date +%Y%m%d).tar.gz "$user_home_dir" #pour compresser le répertoire personnel de l'utilisateur mais ça save pas
             else
                 echo "Le répertoire personnel de $user n'existe pas."
             fi
-            sudo userdel -r $user
+            sudo userdel -r $user #supprimer le compte et le répertoire personnel
             echo "Le compte de $user a été supprimé."
             ;;
         *)

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# exos 2
-
 date=$("%Y-%m-%d") #pour avoir la date du jour sur ce format YYYY-MM-DD
 jours_inactifs=$(date -d "$date -7 days") #pour déterminer une période d'inactivité de 7 jours
 
@@ -13,6 +11,8 @@ echo "il n'y a pas d'utilisateurs inactifs"
 else
 echo "utilisateurs inactifs : $user"
 fi;
+
+#FAIRE L ALERTE J AI ZAPPE JE DOIS LA FAIRE
 
 for user in $users_inactifs; do
     echo "Que souhaitez-vous faire pour l'utilisateur $user ?"

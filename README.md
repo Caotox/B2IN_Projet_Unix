@@ -2,6 +2,6 @@
 **Groupe:** 1
 - Math
 - Jess
-- Antonio
+- Antoine la nouille
 
 **Sujet choisi:** Projet 2

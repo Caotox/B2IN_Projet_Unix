@@ -1,4 +1,8 @@
 # exos 2
+# connexion à un user pour qu'on puisse voir qui est supposément inactif
+# ou plutôt créer une boucle pour voir si dans la liste des users il y en a des inactifs
+
+#!/bin/bash
 
 jours_inactifs=7
 
@@ -19,3 +23,4 @@ for user in $users_inactifs; do
     echo "le compte n'a pas été supprimé"
     fi;
 done;
+

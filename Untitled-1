@@ -1,4 +1,4 @@
-# exo 1
+# exo 1 - Antoine mon bébou
 fichier="Names.txt"
 $var_indice = 0;
 $ declare -a tableaux_indi()

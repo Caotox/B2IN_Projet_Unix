@@ -18,22 +18,27 @@ for user in $users_inactifs; do
     echo "Que souhaitez-vous faire pour l'utilisateur $user ?"
     echo "1) Verrouiller le compte"
     echo "2) Supprimer le compte (le répertoire personnel sera sauvegardé)"
-    echo "3) Ne rien faire"
-    read -p "Choisissez une option (1, 2, 3) : " reponse_inactivite
+    read -p "Choisissez une option (1, 2) : " reponse_inactivite
 case $reponse_inactivite in
         1)
             sudo chage -E 0 $user
             echo "Le compte de $user a été verrouillé."
-            ;
+            ;;
         2)
-            sauvegarder $user && userdel $user
+            user_home_dir=$(getent passwd $user | cut -d: -f6)
+            
+            if [[ -d "$user_home_dir" ]]; then
+                echo "Sauvegarde du répertoire personnel de $user..."
+                tar -czf /backup/${user}_home_backup_$(date +%Y%m%d).tar.gz "$user_home_dir"
+                echo "Sauvegarde terminée : /backup/${user}_home_backup_$(date +%Y%m%d).tar.gz"
+            else
+                echo "Le répertoire personnel de $user n'existe pas."
+            fi
+            sudo userdel -r $user
             echo "Le compte de $user a été supprimé."
-            ;
-
-    else
-    echo "une erreur s'est produite, veuillez réeessayer"
-    fi;
-done;
-
-
-    
+            ;;
+        *)
+            echo "Une erreur s'est produite, veuillez réessayer."
+            ;;
+esac
+done

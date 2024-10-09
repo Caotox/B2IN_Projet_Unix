@@ -11,15 +11,29 @@ users_inactifs=$(lastlog -b $jours_inactifs) #pour voir les users inactifs depui
 if [ -z $users_inactifs ]; then # -z sert à vérifier si la variable est vide
 echo "il n'y a pas d'utilisateurs inactifs"
 else
-echo "votre compte a été détecté comme étant inactif depuis plus de 7 jours"
+echo "utilisateurs inactifs : $user"
 fi;
 
 for user in $users_inactifs; do
-    echo "souhaitez vous verrouillez ou supprimer ce compte ?"
-    read reponse_inactivite
-    if [$reponse_inactivite="supprimer"]; then
-    sauvegarder $users_inactifs && userdel $users_inactifs
+    echo "Que souhaitez-vous faire pour l'utilisateur $user ?"
+    echo "1) Verrouiller le compte"
+    echo "2) Supprimer le compte (le répertoire personnel sera sauvegardé)"
+    echo "3) Ne rien faire"
+    read -p "Choisissez une option (1, 2, 3) : " reponse_inactivite
+case $reponse_inactivite in
+        1)
+            sudo chage -E 0 $user
+            echo "Le compte de $user a été verrouillé."
+            ;
+        2)
+            sauvegarder $user && userdel $user
+            echo "Le compte de $user a été supprimé."
+            ;
+
     else
-    echo "le compte n'a pas été supprimé"
+    echo "une erreur s'est produite, veuillez réeessayer"
     fi;
 done;
+
+
+    

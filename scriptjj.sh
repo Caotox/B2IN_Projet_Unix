@@ -1,19 +1,14 @@
 #!/bin/bash
 
 # exos 2
-# connexion à un user pour qu'on puisse voir qui est supposément inactif
-# ou plutôt créer une boucle pour voir si dans la liste des users il y en a des inactifs
 
-#refaire le truc pour la date et tout pour que ça fasse la date du j - 7j pour que ça soit déclaré comme inactif
-#cependant le truc de date là ne marche pas car ça donne une chaîne de caractères et non une date
-#donc si je fais -7 ça va rien rendre
+date=$("%Y-%m-%d") #pour avoir la date du jour sur ce format YYYY-MM-DD
+jours_inactifs=$(date -d "$date -7 days") #pour déterminer une période d'inactivité de 7 jours
 
-date=`Date`
-jours_inactifs=$date-7
 
-users_inactifs=$(lastlog -b $jours_inactifs)
+users_inactifs=$(lastlog -b $jours_inactifs) #pour voir les users inactifs depuis 7 jours
 
-if [ -z $users_inactifs ]; then
+if [ -z $users_inactifs ]; then # -z sert à vérifier si la variable est vide
 echo "il n'y a pas d'utilisateurs inactifs"
 else
 echo "votre compte a été détecté comme étant inactif depuis plus de 7 jours"

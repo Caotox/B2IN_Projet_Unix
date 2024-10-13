@@ -32,15 +32,10 @@ for user in $users_inactifs; do
                 user_home_dir=$(getent passwd $user | cut -d: -f6)
                 
                 if [[ -d "$user_home_dir" ]]; then
-<<<<<<< HEAD
                     zip -r /backup/${user}_home_backup_$(date +%Y%m%d).zip "$user_home_dir" #pour compresser le répertoire personnel de l'utilisateur
                     gzip -r /backup/${user}_home_backup_$(date +%Y%m%d).zip #pour compresser le fichier zip en supprimant automatiquement l'ancien
                     tar -czf /backup/${user}_home_backup_$(date +%Y%m%d).tar.gz "$user_home_dir" #pour compresser le répertoire personnel de l'utilisateur mais ça save pas
                     #me décider lequel des trois utiliser en fonction du plus optimal => voir guide linux
-=======
-                    echo "Sauvegarde du répertoire personnel de $user..."
-                    tar -czf /backup/${user}_home_backup_$(date +%Y%m%d).tar.gz "$user_home_dir" #pour compresser le répertoire personnel de l'utilisateur mais ça save pas
->>>>>>> 0a0367dedf92ad7c9d7a4de90962cb20d36a73fc
                 else
                     echo "Le répertoire personnel de $user n'existe pas."
                 fi

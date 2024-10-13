@@ -1,0 +1,3 @@
+antoine, sudo, zsh, antoinercq;
+matheo, sudo, fish, moi;
+jessica, sudo, bash, jj;

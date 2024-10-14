@@ -26,18 +26,14 @@ for user in $users_inactifs; do
     case $reponse_inactivite in
             1)
                 sudo chage -E 0 $user #verrouille le compte du user au bout de 0 jour (donc instantanément)
-                echo "Le compte de $user a été verrouillé."
                 ;;
             2)
                 user_home_dir=$(getent passwd $user | cut -d: -f6)
                 
-                if [[ -d "$user_home_dir" ]]; then
-                    tar -czf /backup/${user}_home_backup.tar.gz "$user_home_dir" #pour compresser le répertoire personnel de l'utilisateur mais ça save pas
-                else
-                    echo "Le répertoire personnel de $user n'existe pas."
+                if [[ -d "$user_home_dir" ]]; then #-d pour vérifier que le répertoire existe
+                    tar -czf /backup/${user}_backup.tar.gz "$user_home_dir" #pour compresser le répertoire personnel de l'utilisateur et le save
                 fi
-                sudo userdel -r $user #supprimer le compte et le répertoire personnel
-                echo "Le compte de $user a été supprimé."
+                sudo userdel -r $user #supprimer le compte
                 ;;
             *)
                 echo "Une erreur s'est produite, veuillez réessayer."

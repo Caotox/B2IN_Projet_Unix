@@ -28,7 +28,7 @@ for user in $users_inactifs; do
                 sudo chage -E 0 $user #verrouille le compte du user au bout de 0 jour (donc instantanément)
                 ;;
             2)
-                user_home_dir=$(getent passwd $user | cut -d: -f6)
+                user_home_dir=$(getent passwd $user | cut -d: -f6) #getent pour obtenir les informations de l'utilisateur
                 
                 if [[ -d "$user_home_dir" ]]; then #-d pour vérifier que le répertoire existe
                     tar -czf /backup/${user}_backup.tar.gz "$user_home_dir" #pour compresser le répertoire personnel de l'utilisateur et le save

@@ -1,6 +1,5 @@
 #!/bin/bash
 # exo 1
-#!/bin/bash
 
 fichier="Names.txt"
 declare -a tableau_indi
@@ -36,7 +35,6 @@ for ((i=0; i<longueur_tab; i++)); do
         useradd -m -g "$group" -s "$shell" -d "$rep" "$user"
     fi
 
-    # Définir le mot de passe et l'expiration
     echo "$user:$PASSWORD" | chpasswd
     chage -M 30 "$user"
 

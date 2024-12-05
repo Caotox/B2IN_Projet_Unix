@@ -2,20 +2,30 @@
 # exo 1
 
 fichier="Names.txt"
+
+if [[ ! -f "$fichier" || ! -s "$fichier" ]]; then
+    echo "Erreur : Le fichier '$fichier' est introuvable ou vide."
+    exit 1
+fi
+
 declare -a tableau_indi
 var_indice=0
 
-while read line; do
+while IFS= read -r line || [[ -n "$line" ]]; do
     tableau_indi[$var_indice]="$line"
     var_indice=$((var_indice + 1))
-done < "$fichier"
+done < <(dos2unix < "$fichier") 
+
+if [[ ${#tableau_indi[@]} -eq 0 ]]; then
+    echo "Erreur : Le fichier semble ne pas contenir de lignes valides."
+    exit 1
+fi
 
 echo "Liste des utilisateurs : ${tableau_indi[@]}"
 
 longueur_tab=${#tableau_indi[@]}
-longueur_tab=$((longueur_tab / 4))
+#longueur_tab=$((longueur_tab / 4))
 ecart_tabl=0
-
 for ((i=0; i<longueur_tab; i++)); do
     PASSWORD=$(openssl rand -base64 12)
     echo "Votre mot de passe est : $PASSWORD"

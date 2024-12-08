@@ -24,7 +24,7 @@ fi
 echo "Liste des utilisateurs : ${tableau_indi[@]}"
 
 longueur_tab=${#tableau_indi[@]} # On récupère la taille
-#longueur_tab=$((longueur_tab / 4))
+longueur_tab=$((longueur_tab / 4))
 ecart_tabl=0 # écart tableau car chaque utilisateur a 4 informations (nom, groupe, shell, répertoire) donc on décale de 4 à chaque opération effectuée
 for ((i=0; i<longueur_tab; i++)); do
     PASSWORD=$(openssl rand -base64 12)

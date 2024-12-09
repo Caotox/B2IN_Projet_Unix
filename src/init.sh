@@ -21,11 +21,11 @@ create_group() {
 }
 
 # Création des groupes
-create_group_if_not_exists "CEO" "CEO"
-create_group_if_not_exists "Marketing" "Team responsible for all marketing activities"
-create_group_if_not_exists "ProductOwner" "Team responsible for managing devs"
-create_group_if_not_exists "Devs" "Team responsible for making products"
-create_group_if_not_exists "RH" "Team responsible for hiring new employees"
+create_group "CEO" "CEO"
+create_group "Marketing" "Team responsible for all marketing activities"
+create_group "ProductOwner" "Team responsible for managing devs"
+create_group "Devs" "Team responsible for making products"
+create_group "RH" "Team responsible for hiring new employees"
 
 
 # installation des packages utiles

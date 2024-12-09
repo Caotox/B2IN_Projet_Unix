@@ -92,7 +92,7 @@ fi
 # Etape 5 (BONUS)
 log_info "Etape 5: Rapport"
 create_question "Voulez-vous générer un rapport ? (o/n)"
-if [[ $? -eq 1 ]]; then
+if [[ $? -eq 0 ]]; then
     sudo bash src/logs.sh || { log_error "Erreur inattendu lors de la création du rapport."; exit 1; }
     log_info "Rapport rédigé : ${YELLOW}'./logs.log'${RESET}"
 else

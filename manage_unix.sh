@@ -26,7 +26,7 @@ fi
 # Init
 log_info "Initialisation..."
 # Some things to load...
-# sudo bash src/init.sh
+sudo bash src/init.sh
 log_success "Initialisation terminée !"
 echo ""
 echo ""

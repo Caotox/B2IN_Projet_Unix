@@ -16,3 +16,8 @@ sudo apt install zsh
 sudo apt install fish
 sudo apt install mailutils
 ```
+
+lancer le gestionnaire
+```sh
+sudo bash manage_unix.sh
+```

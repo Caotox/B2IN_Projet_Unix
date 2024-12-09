@@ -3,7 +3,7 @@
 repertoire_rh="/../../rh_directory" #faire des chemins pour les répertoires RH et Direction
 repertoire_direction="/../t../direction_directory"
 
-groupe_rh="RH" 
+groupe_rh="RH"
 groupe_direction="CEO"
 
 setfacl -m g:$groupe_rh:r-- $repertoire_rh #lecture seule pour leur répertoire

@@ -31,4 +31,6 @@ create_group "RH" "Team responsible for hiring new employees"
 # installation des packages utiles
 sudo apt update -y              # met à jour l'installateur de packets
 sudo apt install -y dos2unix    # convertisseur format unix
+sudo apt install -y zsh         # interpréteur de commande
+sudo apt install -y fish        # interpréteur de commande
 sudo apt install -y mailutils   # envoie de mails

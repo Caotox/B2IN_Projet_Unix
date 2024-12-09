@@ -103,4 +103,4 @@ echo ""
 echo ""
 
 
-log_success "${CHECK} : Script éxecuté sans erreurs."
+log_success "${CHECK} : Script éxecuté sans erreurs, le $(date)"

@@ -2,9 +2,9 @@
 
 date=$(date +"%Y-%m-%d") # pour avoir la date du jour au format YYYY-MM-DD
 
-jours_inactifs=90 # définit une période d'inactivité en jours directement (par exemple, 90 jours) car `lastlog -b` accepte un nombre de jours.
+# $1 == période d'inactivité en jours (par exemple, 90 jours) car `lastlog -b` accepte un nombre de jours.
 
-users_inactifs=$(lastlog -b $jours_inactifs | awk 'NR>1 {print $1}') # extraction des noms d'utilisateur avec `awk`, en sautant l'en-tête de la commande `lastlog`.
+users_inactifs=$(lastlog -b $1 | awk 'NR>1 {print $1}') # extraction des noms d'utilisateur avec `awk`, en sautant l'en-tête de la commande `lastlog`.
 
 if [ -z "$users_inactifs" ]; then # -z sert à vérifier si la variable est vide
     echo "il n'y a pas d'utilisateurs inactifs"
@@ -22,7 +22,7 @@ mkdir -p "$backup_dir" # Création du répertoire si nécessaire
 for user in $users_inactifs; do
     user_email="$user@example.com"  # Remplacez par le domaine de l'entreprise
     echo "Cher $user, 
-Votre compte est inactif depuis plus de $jours_inactifs jours. 
+Votre compte est inactif depuis plus de $1 jours. 
 Veuillez vous connecter pour éviter que votre compte ne soit verrouillé ou supprimé." | mail -s "Alerte d'inactivité" $user_email
 
     # interactivité pour gérer les utilisateurs inactifs

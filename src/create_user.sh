@@ -8,7 +8,7 @@ if [[ ! -f "$1" || ! -s "$1" ]]; then
 fi
 
 declare -a tableau_indi # création du tableau
-var_indice=0 # on commence à l'indice 0
+var_indice=0 # on commence à l'indice 0 (début du tableau)
 
 while IFS= read -r line || [[ -n "$line" ]]; do # IFS= pour éviter la suppression des espaces en début et fin de ligne (en gros ça fait en sorte que ça traite 1 ligne comme 1 seule chaine de texte)
     tableau_indi[$var_indice]="$line" # on stocke la ligne dans le tableau

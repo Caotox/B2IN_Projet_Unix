@@ -1,12 +1,12 @@
 antoine
 sudo
 zsh
-antoinercq
+/home/antoinercq
 matheo
 sudo
 fish
-moi
+/home/moi
 Jessica
 sudo
 bash
-jj
+/home/jj

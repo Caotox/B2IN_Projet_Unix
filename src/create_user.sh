@@ -39,9 +39,9 @@ for ((i=0; i<longueur_tab; i++)); do
     fi
 
     if getent passwd "$user" >/dev/null; then # si l'utilisateur existe
-        usermod -g "$group" -s "$shell" -d "$rep" "$user" # on modifie les informations
+        usermod -g "$group" -s $(which "$shell") -d "$rep" "$user" # on modifie les informations
     else
-        useradd -m -g "$group" -s "$shell" -d "$rep" "$user" # sinon on le crée
+        useradd -m -g "$group" -s $(which "$shell") -d "$rep" "$user" # sinon on le crée
     fi
 
     echo "$user:$PASSWORD" | chpasswd 

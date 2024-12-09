@@ -1,10 +1,9 @@
 #!/bin/bash
 # exo 1
 
-fichier="Names.txt"
 
-if [[ ! -f "$fichier" || ! -s "$fichier" ]]; then
-    echo "Erreur : Le fichier '$fichier' est introuvable ou vide."
+if [[ ! -f "$1" || ! -s "$1" ]]; then
+    echo "Erreur : Le fichier '$1' est introuvable ou vide."
     exit 1
 fi
 
@@ -14,7 +13,7 @@ var_indice=0 # on commence à l'indice 0
 while IFS= read -r line || [[ -n "$line" ]]; do # IFS= pour éviter la suppression des espaces en début et fin de ligne (en gros ça fait en sorte que ça traite 1 ligne comme 1 seule chaine de texte)
     tableau_indi[$var_indice]="$line" # on stocke la ligne dans le tableau
     var_indice=$((var_indice + 1)) # indice + 1 pour passer à la ligne suivante (du tableau)
-done < <(dos2unix < "$fichier")  # on utilise dos2unix pour convertir le fichier en format UNIX (pour éviter les problèmes de format (CLRF et LF))
+done < <(dos2unix < "$1")  # on utilise dos2unix pour convertir le fichier en format UNIX (pour éviter les problèmes de format (CLRF et LF))
 
 if [[ ${#tableau_indi[@]} -eq 0 ]]; then
     echo "Erreur : Le fichier semble ne pas contenir de lignes valides."

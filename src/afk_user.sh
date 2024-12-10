@@ -40,17 +40,15 @@ for user in "${users[@]}"; do
     # Vérifier si l'utilisateur est dans la liste des inactifs
     if echo "$users_inactifs" | grep -q "^$user$"; then
         afk=$((afk + 1)) # incrément la variable afk de 1
-        send_email $user
-    #     user_email="$user@example.com"  # Remplacez par le domaine de l'entreprise
-    #     echo "Cher $user, 
-    # Votre compte est inactif depuis plus de $jours_inactifs jours. 
-    # Veuillez vous connecter pour éviter que votre compte ne soit verrouillé ou supprimé." | mail -s "Alerte d'inactivité" $user_email
 
         # interactivité pour gérer les utilisateurs inactifs
         echo "Que souhaitez-vous faire pour l'utilisateur $user ?"
         echo "1) Verrouiller le compte"
         echo "2) Supprimer le compte (le répertoire personnel sera sauvegardé)"
         read -p "Choisissez une option (1 ou 2) : " reponse_inactivite
+
+        # envoie du mail
+        send_email $user
 
         # utilisation de case pour traiter les choix de l'administrateur
         case $reponse_inactivite in

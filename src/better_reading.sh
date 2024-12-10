@@ -26,3 +26,7 @@ log_error() {
 log_info() {
     echo -e "${BLUE}[INFO]${RESET} $1"
 }
+
+log_system() {
+    echo -e "${BLUE}[SYSTÈME]${RESET} ACTION: $1"
+}

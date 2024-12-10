@@ -1,7 +1,7 @@
 #!/bin/bash
 # exo 1
 
-source better_reading.sh
+source etc/better_reading.sh
 
 
 if [[ ! -f "$1" || ! -s "$1" ]]; then
@@ -34,8 +34,9 @@ for ((i=0; i<longueur_tab; i++)); do
     shell=${tableau_indi[2 + ecart_tabl]}
     rep=${tableau_indi[3 + ecart_tabl]}
 
-    PASSWORD=$(openssl rand -base64 12)
-    echo "Le mot de passe du compte ${BLUE}$user${RESET} est : ${BOLD}${RED}$PASSWORD${RESET}"
+    PASSWORD=$(openssl rand -base64 12) # générè un password aléatoire en base 64 avec 12 caractères
+    # L'option -e force echo à interpréter les séquences spéciales comme \033.
+    echo -e "Le mot de passe du compte ${BLUE}$user${RESET} est : ${BOLD}${RED}$PASSWORD${RESET}"
 
     if ! getent group "$group" >/dev/null; then # si le groupe n'existe pas
         groupadd "$group" # on le crée

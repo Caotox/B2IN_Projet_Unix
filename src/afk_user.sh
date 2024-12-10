@@ -42,7 +42,7 @@ for user in "${users[@]}"; do
         afk=$((afk + 1)) # incrément la variable afk de 1
 
         # interactivité pour gérer les utilisateurs inactifs
-        echo "Que souhaitez-vous faire pour l'utilisateur $user ?"
+        echo "Que souhaitez-vous faire pour l'utilisateur ${YELLOW}${BOLD}$user${RESET} ?"
         echo "1) Verrouiller le compte"
         echo "2) Supprimer le compte (le répertoire personnel sera sauvegardé)"
         read -p "Choisissez une option (1 ou 2) : " reponse_inactivite

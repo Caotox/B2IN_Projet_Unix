@@ -89,11 +89,11 @@ log_info "Etape 5: Rapport"
 create_question "Voulez-vous générer un rapport ? (o/n): "
 if [[ $? -eq 0 ]]; then
 
-    echo -e "Ecrivez un nom de chemin valide ( ${YELLOW}rapport.log${RESET} par défaut )"
+    echo -e "Ecrivez un nom de chemin valide ( ${YELLOW}rapport.txt${RESET} par défaut )"
     read -p "> chemin: " path
     # Si la réponse est vide, définir une valeur par défaut
     if [[ -z "$path" ]]; then # -z vérifie la longueur nulle
-        path="rapport.log"
+        path="rapport.txt"
     fi
 
     sudo bash src/rapport.sh $path || { log_error "Erreur inattendu lors de la création du rapport."; exit 1; }

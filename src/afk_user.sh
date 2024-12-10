@@ -32,10 +32,11 @@ Veuillez vous connecter pour éviter que votre compte ne soit verrouillé ou sup
 }
 
 
-# tentative d'une alerte par mail
+afk=0 # utilisateurs afk
 for user in "${users[@]}"; do
     # Vérifier si l'utilisateur est dans la liste des inactifs
     if echo "$users_inactifs" | grep -q "^$user$"; then
+        afk=$((afk + 1)) # incrément la variable afk de 1
         send_email $user
     #     user_email="$user@example.com"  # Remplacez par le domaine de l'entreprise
     #     echo "Cher $user, 
@@ -77,3 +78,7 @@ for user in "${users[@]}"; do
         esac
     fi
 done
+
+if [[ $afk -gt 0 ]]; then
+    log_system "Aucun utilisateur n'a été détecté comme étant inactif."
+fi

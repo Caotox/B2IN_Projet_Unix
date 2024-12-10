@@ -25,10 +25,13 @@ mkdir -p "$backup_dir" # Création du répertoire si nécessaire
 
 send_email() {
     user_email="$1@example.com"  # Remplacez par le domaine de l'entreprise
-    echo "Cher $1, 
+    message= "Cher $1, 
 Votre compte est inactif depuis plus de $jours_inactifs jours. 
-Veuillez vous connecter pour éviter que votre compte ne soit verrouillé ou supprimé." | mail -s "Alerte d'inactivité" $user_email
-    log_system "Mail envoyé à l'adresse suivant ${YELLOW}${BOLD}$1@example.com${RESET}"
+Veuillez vous connecter pour éviter que votre compte ne soit verrouillé ou supprimé."
+
+    echo $message | mail -s "Alerte d'inactivité" $user_email   # entreprise
+    echo $message | mail -s "Alerte d'inactivité" $1@localhost  # boîte perso
+    log_system "Mail envoyé aux adresses suivantes ${YELLOW}${BOLD}$1@example.com${RESET} et ${YELLOW}${BOLD}$1@localhost${RESET}"
 }
 
 
@@ -53,7 +56,7 @@ for user in "${users[@]}"; do
         case $reponse_inactivite in
             1)
                 sudo chage -E 0 $user             #  Chage verrouille le compte du user au bout de 0 jour (donc instantanément)
-                log_system "Le compte de $user a été verrouillé."
+                log_system "Le compte de ${YELLOW}$user${RESET} a été ${BLUE}${BOLD}verrouillé${RESET}."
                 ;;
             2)
                 # récupérer le répertoire personnel de l'utilisateur
@@ -62,14 +65,14 @@ for user in "${users[@]}"; do
                 # vérifier que le répertoire personnel de l'utilisateur existe avant de le sauvegarder
                 if [[ -d "$user_home_dir" ]]; then # -d pour vérifier que le répertoire existe
                     tar -czf "$backup_dir/${user}_backup.tar.gz" "$user_home_dir" # pour compresser le répertoire personnel de l'utilisateur et le save, czf = c create, z compress, f file (indiquer le nom de l'archive)
-                    log_system "Répertoire personnel de $user sauvegardé dans $backup_dir."
+                    log_system "Répertoire personnel de $user sauvegardé dans ${YELLOW}$backup_dir/${user}_backup.tar.gz${RESET}"
                 else
                     log_system "Répertoire personnel de $user introuvable. Aucune sauvegarde effectuée."
                 fi
 
                 # supprimer le compte
                 sudo userdel -r $user
-                log_system "Le compte de $user a été supprimé."
+                log_system "Le compte de ${YELLOW}$user${RESET} a été ${RED}${BOLD}supprimé${RESET}."
                 ;;
             *)
                 # message d'erreur pour les options non valides

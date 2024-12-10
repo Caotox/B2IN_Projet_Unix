@@ -1,7 +1,8 @@
 #!/bin/bash
 
-repertoire_rh="/../../rh_directory" #faire des chemins pour les répertoires RH et Direction
-repertoire_direction="/../t../direction_directory"
+# Cemins pour les répertoires RH et Direction
+repertoire_rh="rh_directory"
+repertoire_direction="direction_directory"
 
 groupe_rh="RH"
 groupe_direction="CEO"

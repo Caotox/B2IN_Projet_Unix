@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source src/better_reading.sh # intègre le script 'better_reading.sh' (= récupère toutes ses fonctions et variables)
+
+
 groups=("CEO" "Marketing" "ProductOwner" "Devs" "RH")
 
 # Pour ajouter un utilisateur à un groupe sans supprimer ses autres appartenances, utilisez l'option -a avec usermod
@@ -17,6 +20,6 @@ for group_name in ${groups[@]}; do # récupère les noms de groupe de la PME
     # Supprime le groupe
 
     groupdel "$group_name"
-    echo "Group '$group_name' is empty and has been deleted!"
+    log_system "le groupe ${BLUE}$group_name${RESET} est vide et a donc été supprimé !"
   fi
 done

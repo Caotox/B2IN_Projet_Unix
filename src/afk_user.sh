@@ -3,7 +3,7 @@
 source src/better_reading.sh # intègre le script 'better_reading.sh' (= récupère toutes ses fonctions et variables)
 
 date=$(date +"%Y-%m-%d") # pour avoir la date du jour au format YYYY-MM-DD
-users=("antoine" "matheo" "Jessica")
+users=("antoine" "matheo" "Jessica" "testuser")
 
 
 # Nombre de jours d'inactivité (passé en paramètre ou par défaut 90) car `lastlog -b` accepte un nombre de jours.
@@ -42,6 +42,7 @@ for user in "${users[@]}"; do
         afk=$((afk + 1)) # incrément la variable afk de 1
 
         # interactivité pour gérer les utilisateurs inactifs
+        echo ""
         echo -e "Que souhaitez-vous faire pour l'utilisateur ${YELLOW}${BOLD}$user${RESET} ?"
         echo "1) Verrouiller le compte"
         echo "2) Supprimer le compte (le répertoire personnel sera sauvegardé)"

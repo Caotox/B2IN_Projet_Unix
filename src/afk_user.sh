@@ -79,6 +79,6 @@ for user in "${users[@]}"; do
     fi
 done
 
-if [[ $afk -gt 0 ]]; then
+if [[ $afk -eq 0 ]]; then # affiche un message si aucun utilisateur est afk
     log_system "Aucun utilisateur n'a été détecté comme étant inactif."
 fi

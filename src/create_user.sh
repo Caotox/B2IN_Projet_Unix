@@ -1,7 +1,7 @@
 #!/bin/bash
 # exo 1
 
-source etc/better_reading.sh
+source src/better_reading.sh
 
 
 if [[ ! -f "$1" || ! -s "$1" ]]; then

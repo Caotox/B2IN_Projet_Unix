@@ -5,7 +5,7 @@ users=("antoine" "matheo" "jessica")
 
 
 # Nombre de jours d'inactivité (passé en paramètre ou par défaut 90) car `lastlog -b` accepte un nombre de jours.
-$jours_inactifs=${1:-90}
+jours_inactifs=${1:-90}
 users_inactifs=$(lastlog -b $jours_inactifs | awk 'NR>1 && $1 != "root" {print $1}') # extraction des noms d'utilisateur avec `awk`, en sautant l'en-tête de la commande `lastlog`.
 
 if [ -z "$users_inactifs" ]; then # -z sert à vérifier si la variable est vide

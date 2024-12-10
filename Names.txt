@@ -10,3 +10,7 @@ Jessica
 sudo
 bash
 /home/jj
+testuser
+sudo
+bash
+/home/testusr

@@ -14,7 +14,7 @@ create_question() {
 
 
 utilisateur=$(whoami)
-log_info "Bienvenue administrateur ${BLUE}$utilisateur${RESET} sur le gestionnaire automatisé des utilisateurs et des groupes de l'entreprise '<undefined>'"
+log_info "Bienvenue administrateur ${YELLOW}$utilisateur${RESET} sur le gestionnaire automatisé des utilisateurs et des groupes de l'entreprise '<undefined>'"
 
 if [[ $EUID -ne 0 ]]; then
     log_error "Ce script bash doit être lancé avec les permissions sudo"
@@ -93,8 +93,15 @@ fi
 log_info "Etape 5: Rapport"
 create_question "Voulez-vous générer un rapport ? (o/n)"
 if [[ $? -eq 0 ]]; then
-    sudo bash src/logs.sh || { log_error "Erreur inattendu lors de la création du rapport."; exit 1; }
-    log_info "Rapport rédigé : ${YELLOW}'./logs.log'${RESET}"
+
+    read -p "Ecrivez un nom de chemin valide ( ${YELLOW}rapport.log${RESET} par défaut )" path
+    # Si la réponse est vide, définir une valeur par défaut
+    if [[ -z "$path" ]]; then # -z vérifie la longueur nulle
+        path="rapport.log"
+    fi
+
+    sudo bash $path || { log_error "Erreur inattendu lors de la création du rapport."; exit 1; }
+    log_info "Rapport rédigé : ${YELLOW}'${path}'${RESET}"
 else
     log_info "Aucun rapport ne sera rédigé."
 fi

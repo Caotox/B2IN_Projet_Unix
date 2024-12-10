@@ -28,7 +28,7 @@ send_email() {
     echo "Cher $1, 
 Votre compte est inactif depuis plus de $jours_inactifs jours. 
 Veuillez vous connecter pour éviter que votre compte ne soit verrouillé ou supprimé." | mail -s "Alerte d'inactivité" $user_email
-    log_system "Mail envoyé à l'adresse suivant ${BLUE}$1@example.com${RESET}"
+    log_system "Mail envoyé à l'adresse suivant ${YELLOW}$1@example.com${RESET}"
 }
 
 

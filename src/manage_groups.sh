@@ -20,6 +20,6 @@ for group_name in ${groups[@]}; do # récupère les noms de groupe de la PME
     # Supprime le groupe
 
     groupdel "$group_name"
-    log_system "le groupe ${BLUE}$group_name${RESET} est vide et a donc été supprimé !"
+    log_system "le groupe ${YELLOW}$group_name${RESET} est vide et a donc été ${RED}supprimé${RESET} !"
   fi
 done

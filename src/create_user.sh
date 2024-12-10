@@ -36,7 +36,7 @@ for ((i=0; i<longueur_tab; i++)); do
 
     PASSWORD=$(openssl rand -base64 12) # générè un password aléatoire en base 64 avec 12 caractères
     # L'option -e force echo à interpréter les séquences spéciales comme \033.
-    log_system "Le mot de passe du compte ${YELLOW}$user${RESET} est ${BOLD}${RED}$PASSWORD${RESET}"
+    log_system "Le mot de passe du compte ${YELLOW}${BOLD}$user${RESET} est ${BOLD}${RED}$PASSWORD${RESET}"
 
     if ! getent group "$group" >/dev/null; then # si le groupe n'existe pas
         groupadd "$group" # on le crée

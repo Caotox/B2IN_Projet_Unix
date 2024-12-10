@@ -31,7 +31,7 @@ log_success "Initialisation terminée !"
 echo ""
 echo ""
 
-create_question "Continuer ? (o/n)"
+create_question "Continuer ? (o/n): "
 if [[ $? -eq 1 ]]; then
     exit 1
 fi
@@ -44,7 +44,7 @@ log_success "Processus terminé avec succès."
 echo ""
 echo ""
 
-create_question "Continuer ? (o/n)"
+create_question "Continuer ? (o/n): "
 if [[ $? -eq 1 ]]; then
     exit 1
 fi
@@ -57,7 +57,7 @@ log_success "Processus terminé avec succès."
 echo ""
 echo ""
 
-create_question "Continuer ? (o/n)"
+create_question "Continuer ? (o/n): "
 if [[ $? -eq 1 ]]; then
     exit 1
 fi
@@ -70,7 +70,7 @@ log_success "Processus terminé avec succès."
 echo ""
 echo ""
 
-create_question "Continuer ? (o/n)"
+create_question "Continuer ? (o/n): "
 if [[ $? -eq 1 ]]; then
     exit 1
 fi
@@ -83,7 +83,7 @@ log_success "Processus terminé avec succès."
 echo ""
 echo ""
 
-create_question "Continuer ? (o/n)"
+create_question "Continuer ? (o/n): "
 if [[ $? -eq 1 ]]; then
     exit 1
 fi
@@ -91,16 +91,17 @@ fi
 
 # Etape 5 (BONUS)
 log_info "Etape 5: Rapport"
-create_question "Voulez-vous générer un rapport ? (o/n)"
+create_question "Voulez-vous générer un rapport ? (o/n): "
 if [[ $? -eq 0 ]]; then
 
-    read -p "Ecrivez un nom de chemin valide ( ${YELLOW}rapport.log${RESET} par défaut )" path
+    echo -e "Ecrivez un nom de chemin valide ( ${YELLOW}rapport.log${RESET} par défaut )"
+    read -p "> chemin: ", path
     # Si la réponse est vide, définir une valeur par défaut
     if [[ -z "$path" ]]; then # -z vérifie la longueur nulle
         path="rapport.log"
     fi
 
-    sudo bash $path || { log_error "Erreur inattendu lors de la création du rapport."; exit 1; }
+    sudo bash src/rapport.sh $path || { log_error "Erreur inattendu lors de la création du rapport."; exit 1; }
     log_info "Rapport rédigé : ${YELLOW}'${path}'${RESET}"
 else
     log_info "Aucun rapport ne sera rédigé."

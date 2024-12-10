@@ -20,6 +20,10 @@ create_group() {
     fi
 }
 
+# Création des répertoires
+mkdir -p direction_directory # -p = --parents, n'efface pas le répertoire si il existe
+mkdir -p rh_directory
+
 # Création des groupes
 create_group "CEO" "CEO"
 create_group "Marketing" "Team responsible for all marketing activities"
@@ -28,9 +32,10 @@ create_group "Devs" "Team responsible for making products"
 create_group "RH" "Team responsible for hiring new employees"
 
 
-# installation des packages utiles
-sudo apt update -y              # met à jour l'installateur de packets
+# Installation des packages
+sudo apt update && sudo apt upgrade -y  # met à jour les paquets
 sudo apt install -y dos2unix    # convertisseur format unix
+sudo apt install -y bash        # interpréteur de commande (installé par défaut)
 sudo apt install -y zsh         # interpréteur de commande
 sudo apt install -y fish        # interpréteur de commande
 sudo apt install -y mailutils   # envoie de mails

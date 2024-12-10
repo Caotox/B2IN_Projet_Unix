@@ -1,6 +1,8 @@
 #!/bin/bash
 # exo 1
 
+source better_reading.sh
+
 
 if [[ ! -f "$1" || ! -s "$1" ]]; then
     echo "Erreur : Le fichier '$1' est introuvable ou vide."
@@ -26,13 +28,14 @@ longueur_tab=${#tableau_indi[@]} # On récupère la taille
 longueur_tab=$((longueur_tab / 4))
 ecart_tabl=0 # écart tableau car chaque utilisateur a 4 informations (nom, groupe, shell, répertoire) donc on décale de 4 à chaque opération effectuée
 for ((i=0; i<longueur_tab; i++)); do
-    PASSWORD=$(openssl rand -base64 12)
-    echo "Votre mot de passe est : $PASSWORD"
 
     user=${tableau_indi[0 + ecart_tabl]} # on récupère les informations de chaque utilisateur
     group=${tableau_indi[1 + ecart_tabl]}
     shell=${tableau_indi[2 + ecart_tabl]}
     rep=${tableau_indi[3 + ecart_tabl]}
+
+    PASSWORD=$(openssl rand -base64 12)
+    echo "Le mot de passe du compte ${BLUE}$user${RESET} est : ${BOLD}${RED}$PASSWORD${RESET}"
 
     if ! getent group "$group" >/dev/null; then # si le groupe n'existe pas
         groupadd "$group" # on le crée
@@ -40,8 +43,10 @@ for ((i=0; i<longueur_tab; i++)); do
 
     if getent passwd "$user" >/dev/null; then # si l'utilisateur existe
         usermod -g "$group" -s $(which "$shell") -d "$rep" "$user" # on modifie les informations
+        echo "les informations du compte ont été modifiées"
     else
         useradd -m -g "$group" -s $(which "$shell") -d "$rep" "$user" # sinon on le crée
+        echo "compte créé"
     fi
 
     echo "$user:$PASSWORD" | chpasswd 

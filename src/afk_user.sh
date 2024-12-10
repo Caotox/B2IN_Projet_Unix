@@ -3,7 +3,7 @@
 source src/better_reading.sh # intègre le script 'better_reading.sh' (= récupère toutes ses fonctions et variables)
 
 date=$(date +"%Y-%m-%d") # pour avoir la date du jour au format YYYY-MM-DD
-users=("antoine" "matheo" "jessica")
+users=("antoine" "matheo" "Jessica")
 
 
 # Nombre de jours d'inactivité (passé en paramètre ou par défaut 90) car `lastlog -b` accepte un nombre de jours.
@@ -25,12 +25,12 @@ mkdir -p "$backup_dir" # Création du répertoire si nécessaire
 
 send_email() {
     user_email="$1@example.com"  # Remplacez par le domaine de l'entreprise
-    message= "Cher $1, 
+    message="Cher $1, 
 Votre compte est inactif depuis plus de $jours_inactifs jours. 
 Veuillez vous connecter pour éviter que votre compte ne soit verrouillé ou supprimé."
 
-    echo $message | mail -s "Alerte d'inactivité" $user_email   # entreprise
-    echo $message | mail -s "Alerte d'inactivité" $1@localhost  # boîte perso
+    echo "$message" | mail -s "Alerte d'inactivité" $user_email   # entreprise
+    echo "$message" | mail -s "Alerte d'inactivité" $1@localhost  # boîte perso
     log_system "Mail envoyé aux adresses suivantes ${YELLOW}${BOLD}$1@example.com${RESET} et ${YELLOW}${BOLD}$1@localhost${RESET}"
 }
 

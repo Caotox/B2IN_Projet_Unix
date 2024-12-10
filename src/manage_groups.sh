@@ -8,7 +8,7 @@ groups=("CEO" "Marketing" "ProductOwner" "Devs" "RH")
 # Pour ajouter un utilisateur à un groupe sans supprimer ses autres appartenances, utilisez l'option -a avec usermod
 usermod -a -G CEO antoine
 usermod -a -G Devs matheo
-usermod -a -G RH jessica
+usermod -a -G RH Jessica
 
 
 # Script pour supprimer les groupes vides
